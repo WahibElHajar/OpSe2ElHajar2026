@@ -32,15 +32,8 @@ public class StadtfuehrungenControl {
 	
 	public void leseAusDatei(String typ){
 	    	try {
-	      		if("csv".equals(typ)){
-	      			this.stModel.leseAusDatei();
-	      	  		this.stView.zeigeInformationsfensterAn(
-	      	  				"Das Stadtfuehrung wurde gelesen!");
-	      		}
-	       		else{
-		   			this.stView.zeigeInformationsfensterAn(
-		   					"Noch nicht implementiert!");
-		   		}
+	      			this.stModel.leseAusDatei(typ);
+	      	  		this.stView.zeigeInformationsfensterAn("Das Stadtfuehrung wurde gelesen!");
 			}
 			catch(IOException exc){
 				this.stView.zeigeFehlermeldungsfensterAn(

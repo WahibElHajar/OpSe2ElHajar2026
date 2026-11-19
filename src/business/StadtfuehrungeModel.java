@@ -6,9 +6,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import fabrikMethode.*;
+
 public class StadtfuehrungeModel {
 	
 	 private Stadtfuehrung stadtfuehrung;
+	 public ReaderCreatorElHajar creator;
+	 public ReaderProductElHajar product;
 
 	 public StadtfuehrungeModel() {
 	 }
@@ -21,16 +25,18 @@ public class StadtfuehrungeModel {
 		 this.stadtfuehrung = stadtfuehrung;
 	 }
 	 
-	 public void leseAusDatei() throws Exception{
+	 public void leseAusDatei(String typ) throws Exception{
 		 
-		 BufferedReader ein = new BufferedReader(new FileReader("Stadtfuehrung.csv"));
-		 String[] zeile = ein.readLine().split(";");
+		 creator = new ConcreteReaderCreatorElHajar();
+		 product = creator.factoryMethod(typ);
+		 
+		 String[] zeile = product.leseAusDatei();
 		 this.stadtfuehrung = new Stadtfuehrung(zeile[0], 
 			 Integer.parseInt(zeile[1]), 
 			 zeile[2], 
 			 Float.parseFloat(zeile[3]), 
 			 zeile[4].split("_"));
-			 ein.close();
+			 product.schliesseDatei();
 	 }
 	 
 	 public void schreibeStadtfuehrungenInCsvDatei() throws Exception {
